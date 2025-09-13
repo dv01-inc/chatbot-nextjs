@@ -1,0 +1,46 @@
+services:
+  cloud-sql-proxy:
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.2
+    command: ["/cloud-sql-proxy"]
+    args:
+      - "--address=0.0.0.0"
+      - "--private-ip"
+      - "--auto-iam-authn"
+      - "--port=5432"
+      - "${CLOUD_SQL_INSTANCE}"
+    ports:
+      - "5432:5432"
+    networks:
+      - better-chatbot-networks
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5432"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  better-chatbot:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - NO_HTTPS=1
+      - USE_CLOUD_SQL=1
+    env_file:
+      - .env
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - better-chatbot-networks
+    depends_on:
+      cloud-sql-proxy:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  better-chatbot-networks:
+    driver: bridge
