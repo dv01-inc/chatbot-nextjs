@@ -1,8 +1,8 @@
 services:
   cloud-sql-proxy:
     image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.2
-    command: ["/cloud-sql-proxy"]
-    args:
+    command:
+      - "/cloud-sql-proxy"
       - "--address=0.0.0.0"
       - "--private-ip"
       - "--auto-iam-authn"
