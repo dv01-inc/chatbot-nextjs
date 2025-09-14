@@ -6,9 +6,9 @@ import {
   ThemeProvider,
   ThemeStyleProvider,
 } from "@/components/layouts/theme-provider";
-import { Toaster } from "ui/sonner";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+import ClientRoot from "@/components/ClientRoot";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,6 +36,23 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <link
+          rel="preload"
+          href={
+            process.env.NEXT_PUBLIC_AUTH_SHELL_URL ||
+            'https://your-auth-shell-url'
+          }
+          as="script"
+          crossOrigin="anonymous"
+        />
+        <Script
+          type="module"
+          crossOrigin="anonymous"
+          src={
+            process.env.NEXT_PUBLIC_AUTH_SHELL_URL ||
+            'https://your-auth-shell-url'
+          }
+        />
         <Script id="api-config" strategy="beforeInteractive">
           {`
             window.apiGatewayUrl = "${
@@ -57,10 +74,9 @@ export default async function RootLayout({
         >
           <ThemeStyleProvider>
             <NextIntlClientProvider>
-              <div id="root">
+              <ClientRoot>
                 {children}
-                <Toaster richColors />
-              </div>
+              </ClientRoot>
             </NextIntlClientProvider>
           </ThemeStyleProvider>
         </ThemeProvider>
