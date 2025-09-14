@@ -764,32 +764,33 @@
 }
 
 .dark {
-  --background: hsl(220 6% 9%);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.92 0.004 286.32);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --sidebar: hsl(220 6% 9%);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(1 0 0 / 15%);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
+  --background: #101014; /* nearly black, minimal color */
+  --foreground: #f5f6fa; /* off-white */
+  --card: #181820; /* very dark gray */
+  --card-foreground: #f5f6fa;
+  --popover: #181820;
+  --popover-foreground: #f5f6fa;
+  --primary: #7c3aed; /* dv01 purple */
+  --primary-foreground: #fff;
+  --secondary: #23244d; /* subtle, for borders or muted UI */
+  --secondary-foreground: #f5f6fa;
+  --muted: #23244d;
+  --muted-foreground: #b3b6d4;
+  --accent: #3b82f6; /* dv01 blue, for highlights only */
+  --accent-foreground: #fff;
+  --destructive: #e11d48;
+  --destructive-foreground: #fff;
+  --border: #23244d;
+  --input: #23244d;
+  --ring: #7c3aed;
+  --sidebar: #181820;
+  --sidebar-foreground: #f5f6fa;
+  --sidebar-primary: #7c3aed;
+  --sidebar-primary-foreground: #fff;
+  --sidebar-accent: #3b82f6;
+  --sidebar-accent-foreground: #fff;
+  --sidebar-border: #23244d;
+  --sidebar-ring: #7c3aed;
 
   [data-theme="zinc"] {
     --background: hsl(240 10% 3.9%);

@@ -33,7 +33,7 @@ const AuthShell = ({ children }: { children: ReactNode }) => {
   }, [authShellRef]);
   console.log('Render:', authStatus);
   return (
-    // @ts-ignore
+    // @ts-expect-error - auth-shell is a custom web component
     <auth-shell ref={authShellRef}>
       {authStatus === 'initial' && (
         <div className="flex items-center justify-center h-screen">
@@ -41,7 +41,7 @@ const AuthShell = ({ children }: { children: ReactNode }) => {
         </div>
       )}
       {authStatus === 'authenticated' && <>{children}</>}
-      {/* @ts-ignore */}
+      {/* @ts-expect-error - auth-shell is a custom web component */}
     </auth-shell>
   );
 };
