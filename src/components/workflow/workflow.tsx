@@ -29,6 +29,7 @@ import {
 import { NodeKind, UINode } from "lib/ai/workflow/workflow.interface";
 import { wouldCreateCycle } from "lib/ai/workflow/would-create-cycle";
 import { createDebounce, fetcher, generateUUID } from "lib/utils";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useSWR from "swr";
 import { safe } from "ts-safe";
@@ -326,7 +327,7 @@ function saveWorkflow(
   workflowId: string,
   diff: ReturnType<typeof extractWorkflowDiff>,
 ) {
-  return fetch(`/api/workflow/${workflowId}/structure`, {
+  return fetchWithAuth(`/api/workflow/${workflowId}/structure`, {
     method: "POST",
     body: JSON.stringify({
       nodes: diff.updateNodes.map((node) =>

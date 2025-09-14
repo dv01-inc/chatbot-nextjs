@@ -48,6 +48,7 @@ import { SelectModel } from "@/components/select-model";
 import { useCopy } from "@/hooks/use-copy";
 import { NodeResultPopup } from "../node-result-popup";
 import { useTranslations } from "next-intl";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 
 const debounce = createDebounce();
 
@@ -217,7 +218,7 @@ ${workflow!.description ? `tool-description: ${workflow!.description}` : ""}`,
         });
       });
       try {
-        const response = await fetch(`/api/workflow/${workflow!.id}/execute`, {
+        const response = await fetchWithAuth(`/api/workflow/${workflow!.id}/execute`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

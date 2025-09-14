@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSWRConfig } from "swr";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 
 export interface BookmarkItem {
   id: string;
@@ -26,7 +27,7 @@ export function useBookmark(options: UseBookmarkOptions = {}) {
 
     try {
       // Make the API call to the generic bookmark endpoint
-      const response = await fetch(`/api/bookmark`, {
+      const response = await fetchWithAuth(`/api/bookmark`, {
         method: isBookmarked ? "DELETE" : "POST",
         headers: {
           "Content-Type": "application/json",

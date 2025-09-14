@@ -9,7 +9,7 @@ import {
 import { EditWorkflowPopup } from "./edit-workflow-popup";
 import { useState } from "react";
 import { safe } from "ts-safe";
-
+import { fetchWithAuth } from "lib/fetchWithAuth";
 import { toast } from "sonner";
 import { mutate } from "swr";
 import { useTranslations } from "next-intl";
@@ -30,7 +30,7 @@ export function WorkflowContextMenu(props: WorkflowContextMenuProps) {
   const handleDeleteWorkflow = async () => {
     toast.promise(
       safe(() =>
-        fetch(`/api/workflow/${props.workflow.id}`, {
+        fetchWithAuth(`/api/workflow/${props.workflow.id}`, {
           method: "DELETE",
         }),
       )

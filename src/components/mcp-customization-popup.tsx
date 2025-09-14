@@ -11,6 +11,7 @@ import {
 
 import useSWR from "swr";
 import { cn, fetcher } from "lib/utils";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 
 import { useTranslations } from "next-intl";
 import {
@@ -93,7 +94,7 @@ export function McpServerCustomizationContent({
         }),
     )
       .map((body) =>
-        fetch(`/api/mcp/server-customizations/${id}`, {
+        fetchWithAuth(`/api/mcp/server-customizations/${id}`, {
           method: "POST",
           body: JSON.stringify(body),
         }),
@@ -108,7 +109,7 @@ export function McpServerCustomizationContent({
   const handleDelete = () => {
     setIsProcessing(true);
     safe(() =>
-      fetch(`/api/mcp/server-customizations/${id}`, {
+      fetchWithAuth(`/api/mcp/server-customizations/${id}`, {
         method: "DELETE",
       }),
     )

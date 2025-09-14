@@ -18,6 +18,7 @@ import { useShallow } from "zustand/shallow";
 import { useTheme } from "next-themes";
 import { extractMCPToolId } from "lib/ai/mcp/mcp-tool-id";
 import { callMcpToolByServerNameAction } from "@/app/api/mcp/actions";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 
 export const OPENAI_VOICE = {
   Alloy: "alloy",
@@ -149,7 +150,7 @@ export function useOpenAIVoiceChat(
 
   const createSession =
     useCallback(async (): Promise<OpenAIRealtimeSession> => {
-      const response = await fetch(
+      const response = await fetchWithAuth(
         `/api/chat/openai-realtime?model=${model}&voice=${voice}`,
         {
           method: "POST",
