@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import {
   ThemeProvider,
   ThemeStyleProvider,
@@ -34,6 +35,16 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <Script id="api-config" strategy="beforeInteractive">
+          {`
+            window.apiGatewayUrl = "${
+              process.env.NEXT_PUBLIC_API_GATEWAY_URL || 'http://localhost:3002'
+            }";
+            window.apiUrl = window.apiGatewayUrl;
+          `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

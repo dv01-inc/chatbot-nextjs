@@ -4,6 +4,7 @@ import { UserPreferences } from "app-types/user";
 import { authClient } from "auth/client";
 import { fetcher } from "lib/utils";
 import { AlertCircle, ArrowLeft, Loader } from "lucide-react";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -71,7 +72,7 @@ export function UserInstructionsContent() {
   const savePreferences = async () => {
     safe(() => setIsSaving(true))
       .ifOk(() =>
-        fetch("/api/user/preferences", {
+        fetchWithAuth("/api/user/preferences", {
           method: "PUT",
           body: JSON.stringify(preferences),
         }),

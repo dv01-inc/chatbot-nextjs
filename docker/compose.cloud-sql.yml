@@ -48,9 +48,9 @@ services:
     ports:
       - '3002:3002'
     environment:
-      - UPSTREAM_SERVICE_URL=http://localhost:9000
+      - UPSTREAM_SERVICE_URL=http://better-chatbot:3000
       - PROXY_SERVER_PORT=3002
-      - PROXY_PATH=/local-service
+      - PROXY_PATH=/chatbot
       - API_GATEWAY_URL=https://api-gateway.dv01.cloud
     env_file:
       - .env

@@ -39,12 +39,15 @@ POSTGRES_USER=chatbot
 POSTGRES_PASSWORD=password
 
 # Gateway Proxy
-UPSTREAM_SERVICE_URL=http://localhost:9000
+UPSTREAM_SERVICE_URL=http://better-chatbot:3000
 PROXY_SERVER_PORT=3002
-PROXY_PATH=/local-service
+PROXY_PATH=/chatbot
 API_GATEWAY_URL=https://api-gateway.dv01.cloud
 DEV_USERNAME=your_username@domain.com
 DEV_PASSWORD=your_password
+
+# Frontend API Gateway URL (for fetchWithAuth)
+NEXT_PUBLIC_API_GATEWAY_URL=http://localhost:3002
 ```
 
 ## Option 2: Google Cloud SQL

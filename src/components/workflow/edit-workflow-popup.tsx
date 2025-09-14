@@ -37,6 +37,7 @@ import { cn, createDebounce } from "lib/utils";
 import { mutate } from "swr";
 import { useTranslations } from "next-intl";
 import { BACKGROUND_COLORS } from "lib/const";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 
 const colorUpdateDebounce = createDebounce();
 
@@ -114,7 +115,7 @@ export function EditWorkflowPopup({
     toast.promise(
       safe(() => zodSchema.parse(config))
         .map(async (body) => {
-          const response = await fetch("/api/workflow", {
+          const response = await fetchWithAuth("/api/workflow", {
             method: "POST",
             body: JSON.stringify(body),
           });

@@ -8,6 +8,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from "ui/card";
 import { Button } from "ui/button";
 import useSWR, { mutate } from "swr";
 import { fetcher } from "lib/utils";
+import { fetchWithAuth } from "lib/fetchWithAuth";
 import { Skeleton } from "ui/skeleton";
 import { BackgroundPaths } from "ui/background-paths";
 import { ShareableCard } from "@/components/shareable-card";
@@ -37,7 +38,7 @@ const createWithExample = async (exampleWorkflow: {
   nodes: Partial<DBNode>[];
   edges: Partial<DBEdge>[];
 }) => {
-  const response = await fetch("/api/workflow", {
+  const response = await fetchWithAuth("/api/workflow", {
     method: "POST",
     body: JSON.stringify({
       ...exampleWorkflow.workflow,
@@ -48,7 +49,7 @@ const createWithExample = async (exampleWorkflow: {
 
   if (!response.ok) return toast.error("Error creating workflow");
   const workflow = await response.json();
-  const structureResponse = await fetch(
+  const structureResponse = await fetchWithAuth(
     `/api/workflow/${workflow.id}/structure`,
     {
       method: "POST",
@@ -101,7 +102,7 @@ export default function WorkflowPage() {
   ) => {
     try {
       setIsVisibilityChangeLoading(true);
-      const response = await fetch(`/api/workflow/${workflowId}`, {
+      const response = await fetchWithAuth(`/api/workflow/${workflowId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ visibility }),
@@ -127,7 +128,7 @@ export default function WorkflowPage() {
 
     try {
       setIsDeleteLoading(true);
-      const response = await fetch(`/api/workflow/${workflowId}`, {
+      const response = await fetchWithAuth(`/api/workflow/${workflowId}`, {
         method: "DELETE",
       });
 

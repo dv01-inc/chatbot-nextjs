@@ -7,7 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const fetcher = async (url: string, options?: RequestInit) => {
-  const res = await fetch(url, {
+  // Import fetchWithAuth dynamically to avoid circular imports
+  const { fetchWithAuth } = await import('./fetchWithAuth');
+
+  const res = await fetchWithAuth(url, {
     redirect: "follow",
     cache: "no-store",
     ...options,
