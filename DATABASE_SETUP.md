@@ -7,7 +7,7 @@ This guide explains how to set up the database for the chatbot-nextjs project. Y
 
 ## Option 1: Local PostgreSQL (Default)
 
-This is the default setup using a local PostgreSQL database in Docker.
+This is the default setup using a local PostgreSQL database in Docker, with the localhost-helper gateway proxy.
 
 ### Prerequisites
 - Docker and Docker Compose installed
@@ -18,19 +18,33 @@ This is the default setup using a local PostgreSQL database in Docker.
    docker-compose -f docker/compose.yml up -d
    ```
 
-2. The database will be automatically created with:
+2. This will start:
+   - **PostgreSQL Database**: `chatbot_db` on port `5432`
+   - **Chatbot Application**: Available at `http://localhost:3000`
+   - **Localhost Helper**: Gateway proxy at `http://localhost:3002`
+
+3. The database will be automatically created with:
    - Database: `chatbot_db`
    - User: `chatbot`
    - Password: `password`
    - Port: `5432`
 
 ### Environment Variables
-The project uses `docker/.env` with these database settings:
+The project uses `docker/.env` with these settings:
 ```env
+# Database
 POSTGRES_URL=postgres://chatbot:password@postgres:5432/chatbot_db
 POSTGRES_DB=chatbot_db
 POSTGRES_USER=chatbot
 POSTGRES_PASSWORD=password
+
+# Gateway Proxy
+UPSTREAM_SERVICE_URL=http://localhost:9000
+PROXY_SERVER_PORT=3002
+PROXY_PATH=/local-service
+API_GATEWAY_URL=https://api-gateway.dv01.cloud
+DEV_USERNAME=your_username@domain.com
+DEV_PASSWORD=your_password
 ```
 
 ## Option 2: Google Cloud SQL
