@@ -1,0 +1,20 @@
+# Development override - adds hot reload and volume mounts
+# Usage: docker-compose -f docker/compose.yml -f docker/compose.dev.yml up -d --build
+# Features: Hot reload, volume mounts, development server
+# Note: Use with base compose file (compose.yml or compose.cloud-sql.yml)
+services:
+  better-chatbot:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile.dev
+    volumes:
+      - ../src:/app/src
+      - ../public:/app/public
+      - ../package.json:/app/package.json
+      - ../next.config.ts:/app/next.config.ts
+      - ../tsconfig.json:/app/tsconfig.json
+    command: pnpm dev
+    environment:
+      - NODE_ENV=development
+      - NO_HTTPS=1
+      - USE_CLOUD_SQL=1

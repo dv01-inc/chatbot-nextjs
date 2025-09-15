@@ -251,10 +251,23 @@ pnpm i
 # Example: The app works with just OPENAI_API_KEY filled in.
 # (The .env file is automatically created when you run pnpm i.)
 
-# 3. Build and start all services (including PostgreSQL) with Docker Compose
+# 3. Choose your setup:
+
+# For development (recommended - hot reload, see changes immediately):
+pnpm docker-compose:dev
+
+# For production with local database:
 pnpm docker-compose:up
 
+# For production with Cloud SQL:
+CLOUD_SQL_INSTANCE=project:region:instance pnpm docker-compose:cloud-sql
+
+# For development with Cloud SQL:
+CLOUD_SQL_INSTANCE=project:region:instance pnpm docker-compose:cloud-sql-dev
 ```
+
+> 📖 **Need more details?** See [DOCKER_SETUP.md](./DOCKER_SETUP.md) for comprehensive setup options, troubleshooting, and configuration details.
+
 
 ### Quick Start (Local Version) 🚀
 

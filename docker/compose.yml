@@ -1,3 +1,6 @@
+# Production setup with local PostgreSQL
+# Usage: docker-compose -f docker/compose.yml up -d --build
+# Features: Production build, local database, no hot reload
 services:
   better-chatbot:
     build:
