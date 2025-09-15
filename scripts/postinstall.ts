@@ -1,7 +1,7 @@
 import { exec } from "child_process";
-import { IS_VERCEL_ENV, IS_DOCKER_ENV, FILE_BASED_MCP_CONFIG } from "lib/const";
+import { IS_VERCEL_ENV, IS_DOCKER_ENV, FILE_BASED_MCP_CONFIG } from "../src/lib/const";
 import { promisify } from "util";
-import "load-env";
+import "../src/lib/load-env";
 const execPromise = promisify(exec);
 
 async function runCommand(command: string, description: string) {

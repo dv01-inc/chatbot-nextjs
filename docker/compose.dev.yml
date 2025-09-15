@@ -17,4 +17,3 @@ services:
     environment:
       - NODE_ENV=development
       - NO_HTTPS=1
-      - USE_CLOUD_SQL=1

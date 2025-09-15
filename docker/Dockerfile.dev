@@ -8,8 +8,12 @@ RUN corepack enable pnpm
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies without running postinstall (skip it for Docker)
-RUN pnpm install --ignore-scripts
+# Copy scripts and lib directories for postinstall script
+COPY scripts ./scripts
+COPY src/lib ./src/lib
+
+# Install dependencies (set DOCKER_BUILD to skip postinstall environment setup)
+RUN DOCKER_BUILD=1 pnpm install
 
 # Copy source code (this will be overridden by volume mounts)
 COPY . .
