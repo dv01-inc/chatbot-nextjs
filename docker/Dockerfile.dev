@@ -5,8 +5,9 @@ WORKDIR /app
 # Install pnpm
 RUN corepack enable pnpm
 
-# Copy package files
+# Copy package files and scripts (needed for postinstall)
 COPY package.json pnpm-lock.yaml ./
+COPY scripts ./scripts
 
 # Install dependencies
 RUN pnpm install
