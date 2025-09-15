@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
+// import { getSessionCookie } from 'better-auth/cookies';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -11,11 +11,11 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith("/ping")) {
     return new Response("pong", { status: 200 });
   }
-  const sessionCookie = getSessionCookie(request);
+  // const sessionCookie = getSessionCookie(request);
 
-  if (!sessionCookie) {
-    return NextResponse.redirect(new URL("/sign-in", request.url));
-  }
+  // if (!sessionCookie) {
+  //   return NextResponse.redirect(new URL("/sign-in", request.url));
+  // }
   return NextResponse.next();
 }
 

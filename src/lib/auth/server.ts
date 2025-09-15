@@ -14,7 +14,7 @@ import {
 import { getAuthConfig } from "./config";
 
 import logger from "logger";
-import { redirect } from "next/navigation";
+// import { redirect } from 'next/navigation';
 
 const {
   emailAndPasswordEnabled,
@@ -87,7 +87,7 @@ export const getSession = async () => {
     });
   if (!session) {
     logger.error("No session found");
-    redirect("/sign-in");
+    // redirect("/sign-in");
   }
   return session!;
 };
