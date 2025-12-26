@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import "katex/dist/katex.min.css";
 import {
   ThemeProvider,
   ThemeStyleProvider,
@@ -24,8 +25,6 @@ export const metadata: Metadata = {
     "Better Chatbot is a chatbot that uses the Tools to answer questions.",
 };
 
-// const themes = BASE_THEMES.flatMap((t) => [t, `${t}-dark`]);
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -40,7 +39,7 @@ export default async function RootLayout({
           rel="preload"
           href={
             process.env.NEXT_PUBLIC_AUTH_SHELL_URL ||
-            'https://your-auth-shell-url'
+            "https://your-auth-shell-url"
           }
           as="script"
           crossOrigin="anonymous"
@@ -50,13 +49,13 @@ export default async function RootLayout({
           crossOrigin="anonymous"
           src={
             process.env.NEXT_PUBLIC_AUTH_SHELL_URL ||
-            'https://your-auth-shell-url'
+            "https://your-auth-shell-url"
           }
         />
         <Script id="api-config" strategy="beforeInteractive">
           {`
             window.apiGatewayUrl = "${
-              process.env.NEXT_PUBLIC_API_GATEWAY_URL || 'http://localhost:3002'
+              process.env.NEXT_PUBLIC_API_GATEWAY_URL || "http://localhost:3002"
             }";
             window.apiUrl = window.apiGatewayUrl;
           `}
@@ -67,16 +66,14 @@ export default async function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           themes={["light", "dark"]}
           storageKey="app-theme-v2"
           disableTransitionOnChange
         >
           <ThemeStyleProvider>
             <NextIntlClientProvider>
-              <ClientRoot>
-                {children}
-              </ClientRoot>
+              <ClientRoot>{children}</ClientRoot>
             </NextIntlClientProvider>
           </ThemeStyleProvider>
         </ThemeProvider>
